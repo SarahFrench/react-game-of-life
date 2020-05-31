@@ -1,0 +1,29 @@
+
+.board {
+  margin-top: 3em;
+  margin-bottom: 5em;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 1em;
+}
+
+.board__row{
+  margin: 0;
+}
+
+.board__cell{
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border: solid 1px grey;
+  margin-bottom: -6px;
+}
+
+.alive {
+  background-color: black;
+}
+
+.d-block {
+  display: block;
+}
