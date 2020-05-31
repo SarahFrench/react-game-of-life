@@ -29,7 +29,7 @@ class Game extends React.Component {
             game: game
         }
     }
-    
+
     renderCell(cellValue, x, y){
         const cellState = !!cellValue ? 'alive' : 'dead';
         return (
@@ -73,6 +73,11 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game">
+                <div className="stats">
+                    <p>
+                        {`Turns : ${this.state.game.turns}`}
+                    </p>
+                </div>
                 <div className="board">
                     {this.createBoard()}
                 </div>
