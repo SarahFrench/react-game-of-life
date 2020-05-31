@@ -30,9 +30,6 @@ class Game extends React.Component {
         }
     }
     
-    componentDidMount(){
-    }
-
     renderCell(cellValue, x, y){
         const cellState = !!cellValue ? 'alive' : 'dead';
         return (
@@ -56,7 +53,21 @@ class Game extends React.Component {
     takeTurn = () =>{
         let game = this.state.game;
         game.takeTurn();
-        this.setState({gmae: game});
+        this.setState({game: game});
+    }
+
+    seedLife = () =>{
+        let newBoard = this.state.game.currentState;
+
+        for (let i = 0; i < this.state.game.currentState.length; i++) {
+            for (let j = 0; j < this.state.game.currentState[i].length; j++) {
+                newBoard[i][j] = (Math.random() > 0.5) ? 1 : 0;;
+            }
+        }
+        let newGame = new GameOfLife();
+        newGame.setupBoard(newBoard);
+        // this.setState({ ...this.state.game, currentState: newGame.currentState });
+        this.setState({ game: newGame });
     }
 
     render() {
@@ -67,6 +78,7 @@ class Game extends React.Component {
                 </div>
                 <div className="button">
                     <input data-testid="take-turn" type="button" onClick={this.takeTurn} value="Click to take a turn"></input>
+                    <input data-testid="seed-life" type="button" onClick={this.seedLife} value="Click to seed life"></input>
                 </div>
             </div>
         );
