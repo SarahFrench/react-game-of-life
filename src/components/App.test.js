@@ -4,6 +4,8 @@ import App from './App';
 
 test('renders learn react link', () => {
   const { getByText } = render(<App />);
-  const button = screen.getByTestId('take-turn');
-  expect(button).toBeInTheDocument();
+  const turnButton = screen.getByTestId('take-turn');
+  const seedButton = screen.getByTestId('seed-life');
+  expect(turnButton).toBeInTheDocument();
+  expect(seedButton).toBeInTheDocument();
 });
