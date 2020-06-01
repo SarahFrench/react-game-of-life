@@ -135,7 +135,7 @@ class Game extends React.Component {
                         {`Turns : ${this.state.game.turns}`}
                     </p>
                     <p className={!this.anyLifePresent() ? "visible" : "hidden"}>
-                        All your cells died 😭
+                        All your cells died <span role="img" aria-label="crying emoji">😭</span>
                     </p>
                 </div>
                 <div className="board">
