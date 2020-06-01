@@ -5,9 +5,8 @@ import './App.css';
 class App extends React.Component {
   render(){
     return(
-      <div className="app">
+      <div className="app center-content">
         <h1>Game of Life</h1>
-        <p>(WIP)</p>
         <Game />
       </div>
     );
