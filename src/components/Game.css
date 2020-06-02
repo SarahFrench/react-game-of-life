@@ -17,10 +17,6 @@
   transition: background-color 100ms linear;
 }
 
-.alive {
-  background-color: black;
-}
-
 .d-block {
   display: block;
 }
