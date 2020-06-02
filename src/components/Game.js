@@ -2,6 +2,7 @@ import React from 'react';
 import './Game.css';
 
 import GameOfLife from '../code/GameOfLife.js';
+import Board from './Board';
 import Cell from './Cell';
 
 
@@ -125,8 +126,8 @@ class Game extends React.Component {
                         All your cells died <span role="img" aria-label="crying emoji">😭</span>
                     </p>
                 </div>
-                <div className="board">
-                    {this.createBoard()}
+                <div className="mb-3">
+                    <Board cells={this.state.game.currentState} toggleCellState={this.toggleCellState} />
                 </div>
                 <div className="controls center-content">
                     <h4 className="ui horizontal divider header">
