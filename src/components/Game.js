@@ -21,8 +21,7 @@ class Game extends React.Component {
             [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [1, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 1, 0, 0, 1, 0]
+            [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
         game.setupBoard(boardStartingState);
 
@@ -70,7 +69,6 @@ class Game extends React.Component {
             gameMode: 'manual'
         })
     }
-
 
     createBoard(){
         let rows = [];
