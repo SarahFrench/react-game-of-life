@@ -117,7 +117,7 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div className="game">
+            <div className="game center-content">
                 <div className="stats">
                     <p>
                         {`Turns : ${this.state.game.turns}`}
