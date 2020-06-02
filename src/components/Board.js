@@ -13,7 +13,7 @@ class Board extends React.Component {
         let cells = this.props.cells.map((row, yRowNumber) => {
             let cells = [];
             row.forEach( (cell, xColumnNumber) => {
-                cells.push(<Cell status={cell} x={xColumnNumber} y={yRowNumber} toggleCellState={this.props.toggleCellState} />)
+                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} x={xColumnNumber} y={yRowNumber} toggleCellState={this.props.toggleCellState} />)
             });
             return cells;
         })
