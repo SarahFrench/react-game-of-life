@@ -2,6 +2,8 @@ import React from 'react';
 import './Game.css';
 
 import GameOfLife from '../code/GameOfLife.js';
+import Board from './Board';
+import Cell from './Cell';
 
 
 class Game extends React.Component {
@@ -20,8 +22,7 @@ class Game extends React.Component {
             [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [1, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 1, 0, 0, 1, 0]
+            [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
         game.setupBoard(boardStartingState);
 
@@ -55,7 +56,6 @@ class Game extends React.Component {
         let state = newGame.currentState[y][x];
         newGame.currentState[y][x] = state === 1 ? 0 : 1;
         this.setState({ game: newGame });
-
     }
 
     toggleGameMode = () => {
@@ -71,24 +71,12 @@ class Game extends React.Component {
         })
     }
 
-    renderCell = (cellValue, x, y) => {
-        const cellState = !!cellValue ? 'alive' : 'dead';
-        return (
-            <div 
-                key={`cell-${x}-${y}`}
-                onClick={() => { this.toggleCellState(x,y)}}
-                className={`board__cell ${cellState}`}
-            >
-            </div>
-        );
-    }
-
     createBoard(){
         let rows = [];
         this.state.game.currentState.forEach( (row, y) => {
             let cells = [];
-            row.forEach( (cell, x) => {
-                cells.push(this.renderCell(cell, x, y))
+            row.forEach( (cellStatus, x) => {
+                cells.push(< Cell key={`cell-${x}-${y}`} status={cellStatus} x={x} y={y} toggleCellState={this.toggleCellState} />)
             });
             rows.push(<div className="board__row" key={`row-${y}`}>{cells}</div>);
         });
@@ -138,20 +126,20 @@ class Game extends React.Component {
                         All your cells died <span role="img" aria-label="crying emoji">😭</span>
                     </p>
                 </div>
-                <div className="board">
-                    {this.createBoard()}
+                <div className="mb-3">
+                    <Board cells={this.state.game.currentState} toggleCellState={this.toggleCellState} />
                 </div>
                 <div className="controls center-content">
-                    <h4 class="ui horizontal divider header">
-                        <i class="sliders horizontal icon"></i>
+                    <h4 className="ui horizontal divider header">
+                        <i className="sliders horizontal icon"></i>
                         Controls
                     </h4>
                     <div className="mb-1">
                         <button
-                            class="ui labeled icon button"
+                            className="ui labeled icon button"
                             onClick={this.toggleGameMode}
                         >
-                            <i class={`${this.getGameModeLogo()} icon`}></i>
+                            <i className={`${this.getGameModeLogo()} icon`}></i>
                             {this.getPlayButtonText()}
                         </button>
                     </div>
@@ -159,8 +147,8 @@ class Game extends React.Component {
                         <input className={this.getButtonClasses()} data-testid="take-turn" type="button" onClick={this.takeTurn} value="Click to take a turn"></input>
                         <input className={this.getButtonClasses()} data-testid="seed-life" type="button" onClick={this.seedLife} value="Reset game"></input>
                     </div>
-                    <div class="ui card">
-                        <div class="content">
+                    <div className="ui card">
+                        <div className="content">
                             Use the controls above to run the game in automatic or manual mode. Click on cells to toggle alive/dead, or click 'Reset game' to seed life throughout the board.
                         </div>
                     </div>
