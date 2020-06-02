@@ -10,8 +10,6 @@ class Board extends React.Component {
 
     cells = () => {
 
-        console.log(this.props.cells);
-
         let cells = this.props.cells.map((row, yRowNumber) => {
             let cells = [];
             row.forEach( (cell, xColumnNumber) => {
