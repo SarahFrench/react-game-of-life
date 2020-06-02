@@ -1,0 +1,12 @@
+.board {
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat( auto-fill, 10%);
+  grid-template-rows: repeat( auto-fill, 10%);
+  column-gap: 0;
+
+  border-radius: 10px;
+  border: black 5px solid;
+  overflow: hidden;
+}

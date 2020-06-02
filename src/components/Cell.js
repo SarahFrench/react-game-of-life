@@ -1,4 +1,5 @@
 import React from 'react';
+import './Cell.css';
 
 class Cell extends React.Component {
 
@@ -10,7 +11,7 @@ class Cell extends React.Component {
         return (
             <div
                 onClick={() => { this.props.toggleCellState(this.props.x, this.props.y) }}
-                className={`board__cell ${this.getClassName()}`}
+                className={`cell ${this.getClassName()}`}
             >
             </div>
         );

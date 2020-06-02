@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
+import './Board.css';
 
 class Board extends React.Component {
     constructor(props){
@@ -10,12 +11,10 @@ class Board extends React.Component {
 
     cells = () => {
 
-        console.log(this.props.cells);
-
         let cells = this.props.cells.map((row, yRowNumber) => {
             let cells = [];
             row.forEach( (cell, xColumnNumber) => {
-                cells.push(<Cell status={cell} x={xColumnNumber} y={yRowNumber} toggleCellState={this.props.toggleCellState} />)
+                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} x={xColumnNumber} y={yRowNumber} toggleCellState={this.props.toggleCellState} />)
             });
             return cells;
         })
