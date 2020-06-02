@@ -142,16 +142,16 @@ class Game extends React.Component {
                     {this.createBoard()}
                 </div>
                 <div className="controls center-content">
-                    <h4 class="ui horizontal divider header">
-                        <i class="sliders horizontal icon"></i>
+                    <h4 className="ui horizontal divider header">
+                        <i className="sliders horizontal icon"></i>
                         Controls
                     </h4>
                     <div className="mb-1">
                         <button
-                            class="ui labeled icon button"
+                            className="ui labeled icon button"
                             onClick={this.toggleGameMode}
                         >
-                            <i class={`${this.getGameModeLogo()} icon`}></i>
+                            <i className={`${this.getGameModeLogo()} icon`}></i>
                             {this.getPlayButtonText()}
                         </button>
                     </div>
@@ -159,8 +159,8 @@ class Game extends React.Component {
                         <input className={this.getButtonClasses()} data-testid="take-turn" type="button" onClick={this.takeTurn} value="Click to take a turn"></input>
                         <input className={this.getButtonClasses()} data-testid="seed-life" type="button" onClick={this.seedLife} value="Reset game"></input>
                     </div>
-                    <div class="ui card">
-                        <div class="content">
+                    <div className="ui card">
+                        <div className="content">
                             Use the controls above to run the game in automatic or manual mode. Click on cells to toggle alive/dead, or click 'Reset game' to seed life throughout the board.
                         </div>
                     </div>
