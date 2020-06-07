@@ -28,23 +28,40 @@ class Game extends React.Component {
 
         this.state = {
             game: game,
-            gameMode : 'manual'
+            isLifePresent: true,
+            automaticModeOn : false,
+            interval: undefined
         }
     }
 
-    componentDidMount(){
-        setInterval( () => {
-            if(this.state.gameMode === 'automatic'){
-                this.takeTurn();
-                if (!this.anyLifePresent()) {
-                    // this.seedLife();
-                    this.useManualMode();
-                }
+    componentDidUpdate = () =>{
+        if(!this.anyLifePresent()){
+            if(this.state.automaticModeOn){
+                //stop automatic mode
+                clearInterval(this.state.interval); //stop the interval
+                this.setState({
+                    isLifePresent: false,
+                    interval: undefined,
+                    automaticModeOn: false
+                });
             }
-        }, 500)
+        }
     }
 
-    componentDidUpdate(){
+    toggleAutomaticMode = () => {
+        if (!this.state.automaticModeOn){
+            let interval = setInterval(this.takeTurn, 500);
+            this.setState({
+                interval: interval,
+                automaticModeOn: true
+            });
+        } else {
+            clearInterval(this.state.interval); //stop the interval
+            this.setState({
+                interval: undefined,
+                automaticModeOn: false
+            });
+        }
     }
 
     anyLifePresent = () =>{
@@ -56,19 +73,6 @@ class Game extends React.Component {
         let state = newGame.currentState[y][x];
         newGame.currentState[y][x] = state === 1 ? 0 : 1;
         this.setState({ game: newGame });
-    }
-
-    toggleGameMode = () => {
-        let newMode = this.state.gameMode === 'automatic' ? 'manual' : 'automatic';
-        this.setState({
-            gameMode: newMode
-        })
-    }
-
-    useManualMode = () => {
-        this.setState({
-            gameMode: 'manual'
-        })
     }
 
     createBoard(){
@@ -100,19 +104,22 @@ class Game extends React.Component {
         let newGame = new GameOfLife();
         newGame.setupBoard(newBoard);
         // this.setState({ ...this.state.game, currentState: newGame.currentState });
-        this.setState({ game: newGame });
+        this.setState({
+            game: newGame,
+            isLifePresent: true        
+        });
     }
 
     getGameModeLogo = () => {
-        return (this.state.gameMode === "automatic" ? 'pause' : 'play');
+        return (this.state.automaticModeOn ? 'pause' : 'play');
     }
 
     getButtonClasses = () => {
-        return (this.state.gameMode === "automatic" ? 'ui button disabled' : 'ui button');
+        return (this.state.automaticModeOn ? 'ui button disabled' : 'ui button');
     }
 
     getPlayButtonText = () => {
-        return (this.state.gameMode === "automatic") ? "Pause & swap to manual mode" : "Start automatic mode";
+        return this.state.automaticModeOn ? "Pause & swap to manual mode" : "Start automatic mode";
     }
 
     render() {
@@ -122,7 +129,7 @@ class Game extends React.Component {
                     <p>
                         {`Turns : ${this.state.game.turns}`}
                     </p>
-                    <p className={!this.anyLifePresent() ? "visible" : "hidden"}>
+                    <p className={!this.state.isLifePresent ? "visible" : "hidden"}>
                         All your cells died <span role="img" aria-label="crying emoji">😭</span>
                     </p>
                 </div>
@@ -136,15 +143,15 @@ class Game extends React.Component {
                     </h4>
                     <div className="mb-1">
                         <button
-                            className="ui labeled icon button"
-                            onClick={this.toggleGameMode}
+                            className={`ui labeled icon button ${this.state.isLifePresent ? "" : "disabled"}`}
+                            onClick={this.toggleAutomaticMode}
                         >
                             <i className={`${this.getGameModeLogo()} icon`}></i>
                             {this.getPlayButtonText()}
                         </button>
                     </div>
                     <div className="mb-1">
-                        <input className={this.getButtonClasses()} data-testid="take-turn" type="button" onClick={this.takeTurn} value="Click to take a turn"></input>
+                        <input className={this.getButtonClasses()} data-testid="take-turn" type="button" onClick={this.takeTurn} value="Click to take 1 turn"></input>
                         <input className={this.getButtonClasses()} data-testid="seed-life" type="button" onClick={this.seedLife} value="Reset game"></input>
                     </div>
                     <div className="ui card">
