@@ -3,7 +3,6 @@ import './Game.css';
 
 import GameOfLife from '../code/GameOfLife.js';
 import Board from './Board';
-import Cell from './Cell';
 
 
 class Game extends React.Component {
@@ -73,18 +72,6 @@ class Game extends React.Component {
         let state = newGame.currentState[y][x];
         newGame.currentState[y][x] = state === 1 ? 0 : 1;
         this.setState({ game: newGame });
-    }
-
-    createBoard(){
-        let rows = [];
-        this.state.game.currentState.forEach( (row, y) => {
-            let cells = [];
-            row.forEach( (cellStatus, x) => {
-                cells.push(< Cell key={`cell-${x}-${y}`} status={cellStatus} x={x} y={y} toggleCellState={this.toggleCellState} />)
-            });
-            rows.push(<div className="board__row" key={`row-${y}`}>{cells}</div>);
-        });
-        return rows;
     }
 
     takeTurn = () =>{
