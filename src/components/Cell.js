@@ -10,7 +10,7 @@ class Cell extends React.Component {
     render(){
         return (
             <div
-                onClick={() => { this.props.toggleCellState(this.props.x, this.props.y) }}
+                onClick={ this.props.toggleCellState }
                 className={`cell ${this.getClassName()}`}
             >
             </div>
