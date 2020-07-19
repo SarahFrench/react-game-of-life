@@ -1,22 +1,18 @@
 import React from 'react';
 import './Cell.css';
 
-class Cell extends React.Component {
-
-    getClassName(){
-        return !!this.props.status ? 'alive' : 'dead';
+const Cell = ({ status, toggleCellState}) => {
+    const getClassName = () => {
+        return !!status ? 'alive' : 'dead';
     }
 
-    render(){
-        return (
-            <div
-                onClick={ this.props.toggleCellState }
-                className={`cell ${this.getClassName()}`}
-            >
-            </div>
-        );
-    }
-
-}
+    return (
+        <div
+            onClick={toggleCellState}
+            className={`cell ${getClassName()}`}
+        >
+        </div>
+    );
+};
 
 export default Cell;
