@@ -2,33 +2,26 @@ import React from 'react';
 import Cell from './Cell';
 import './Board.css';
 
-class Board extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-        }
-    }
+const Board = ({ cells, toggleCellState}) => {
+    
+    const boardsCells = () => {
 
-    cells = () => {
-
-        let cells = this.props.cells.map((row, yRowNumber) => {
+        let boardsCells = cells.map((row, yRowNumber) => {
             let cells = [];
-            row.forEach( (cell, xColumnNumber) => {
-                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} toggleCellState={() => { this.props.toggleCellState(xColumnNumber, yRowNumber)} } />)
+            row.forEach((cell, xColumnNumber) => {
+                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} toggleCellState={() => { toggleCellState(xColumnNumber, yRowNumber) }} />)
             });
             return cells;
         })
 
-        return cells;
+        return boardsCells;
     }
 
-    render(){
-        return(
-            <div className="board">
-                {this.cells()}
-            </div>
-        );
-    }
-}
+    return (
+        <div className="board">
+            {boardsCells()}
+        </div>
+    );
+};
 
 export default Board;
