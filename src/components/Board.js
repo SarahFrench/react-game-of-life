@@ -9,7 +9,7 @@ const Board = ({ cells, toggleCellState}) => {
         let boardsCells = cells.map((row, yRowNumber) => {
             let cells = [];
             row.forEach((cell, xColumnNumber) => {
-                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} toggleCellState={() => { this.props.toggleCellState(xColumnNumber, yRowNumber) }} />)
+                cells.push(<Cell key={`cell-${yRowNumber}-${xColumnNumber}`} status={cell} toggleCellState={() => { toggleCellState(xColumnNumber, yRowNumber) }} />)
             });
             return cells;
         })
